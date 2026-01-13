@@ -36,6 +36,12 @@
 |:---:|:---:|
 | ![Stats](screenshots/stats.png) | ![Settings](screenshots/settings_menu.png) |
 
+## Примеры в игре / In-Game Examples
+
+| Компактный режим / Compact Mode | Полный режим / Full Mode |
+|:---:|:---:|
+| ![In-Game 1](screenshots/ingame_example_1.png) | ![In-Game 2](screenshots/ingame_example_2.png) |
+
 ---
 
 ## Инструкция по установке
