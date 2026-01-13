@@ -13,7 +13,7 @@
 (function () {
     'use strict'
 
-    // --- CONFIG & STATE ---
+
     let SETTINGS = {
         opacity: parseFloat(localStorage.getItem('ml_pip_opacity')) || 1.0,
         scale: 1.0,
@@ -175,7 +175,7 @@
     let isPipActive = false
     let activePanel = null
 
-    // --- CSS ---
+
     const css = `
         #ml-control-panel {
             position: fixed; top: 0; left: 50%;
@@ -245,7 +245,7 @@
         .ml-mini-btn:hover { background: rgba(255,255,255,0.25); }
     `
 
-    // --- LOGIC ---
+
     function parseComplexNumber(str) { return parseFloat((str || '').replace(/,/g, '.').replace(/\s&nbsp;/g, '').replace(/[^0-9.-]/g, '')) || 0 }
     function parseLevel(str) { return parseInt((str || '').replace(/\D/g, ''), 10) || 0 }
     function parseTime(timeStr) {
@@ -296,38 +296,15 @@
         return { text: `${eventName} (${formatSimpleTime(diff)})`, color: next.color }
     }
 
-    // --- DRAWING ---
-    function drawOverlay(data) {
-        // ... (lines 205-592 omitted for brevity, no hardcoded strings there except VS) ...
-        // Wait, VS is in line 549/550 range.
-
-        // I need to be careful with replace_file_content limit. 
-        // I will target specific blocks or replace the getNextEvent and then specific draw calls.
-        // Let's do getNextEvent first.
-        // And updateSetting.
-    }
-
-    // Actually, I will just replace the whole functions if possible or use multiple replace blocks.
-    // The previous replace covered createControlPanel and createPopups.
-    // Now I need to cover:
-    // 1. getNextEvent (for stage names)
-    // 2. formatNum (locale)
-    // 3. togglePiP (button text)
-    // 4. updateSetting (key map)
-    // 5. drawOverlay (VS, WIN/LOSS/DRAW, STAGE, KILLS, LEVEL, DIFF)
-
-    // Let's do updateSetting first as it's at the end.
 
 
-    // --- DRAWING ---
+
     function drawOverlay(data) {
         if (!ctx) return
 
         if (SETTINGS.fullFocusMode) {
-            // --- FULL FOCUS MODE (Ultra Tiny Square) ---
-            const hdScale = 4.0 // Максимальная четкость для мелкого окна
 
-            // Базовый размер 60x60 - это очень мало
+            const hdScale = 4.0
             const sideSize = 60 * SETTINGS.scale * hdScale
 
             if (canvas.width !== sideSize || canvas.height !== sideSize) {
@@ -343,33 +320,22 @@
             ctx.globalAlpha = SETTINGS.opacity
 
             const CX = sideSize / 2
-
-            // Делим на 3 строки, высота строки ~20 (при скейле 1)
             const rowHeight = sideSize / 3
 
             const drawMetric = (label, val, rowIndex) => {
                 const diffStr = (val > 0 ? '+' : '') + val
                 const color = val > 0 ? C.green : (val < 0 ? C.red : '#888')
 
-                // Верхняя граница строки
                 const yTop = rowIndex * rowHeight
                 const yCenter = yTop + (rowHeight / 2)
 
                 ctx.textAlign = 'center'
-
-                // Название прижимаем к самому верху строки
                 ctx.fillStyle = '#666'
-                // Шрифт подписи всего 5px (базовый), но четкий
                 ctx.font = `bold ${5 * SETTINGS.scale * hdScale}px Segoe UI`
                 ctx.fillText(label, CX, yCenter - (4 * SETTINGS.scale * hdScale))
-
-                // Значение занимает всё оставшееся место
                 ctx.fillStyle = color
-                // Шрифт значения 13px (базовый) - жирный
                 ctx.font = `900 ${13 * SETTINGS.scale * (SETTINGS.textScale || 1.0) * hdScale}px Segoe UI`
                 ctx.fillText(diffStr, CX, yCenter + (6 * SETTINGS.scale * hdScale))
-
-                // Тонкие разделители между строками, чтобы не сливалось
                 if (rowIndex < 2) {
                     ctx.fillStyle = 'rgba(255,255,255,0.1)'
                     ctx.fillRect(10 * hdScale, yTop + rowHeight - 1, sideSize - (20 * hdScale), 1 * hdScale)
@@ -381,13 +347,13 @@
             const dDiff = data.lDiff - data.rDiff
 
             drawMetric('KILL', kDiff, 0)
-            drawMetric('LEVEL', lDiff, 1) // Чуть полнее название, место есть по ширине
+            drawMetric('LEVEL', lDiff, 1)
             drawMetric('DIFF %', dDiff, 2)
 
             return
         }
 
-        // ... стандартный код
+
 
         const PADDING = 15 * SETTINGS.scale
         const banSize = 22 * SETTINGS.scale * SETTINGS.banScale
@@ -396,12 +362,9 @@
         const buildIconSize = 20 * SETTINGS.scale * SETTINGS.buildScale
         const avSize = 64 * SETTINGS.scale
 
-        // --- Calculate Auto Height (Dry Run) ---
-        // Re-use the same compact detection logic (duplicated for dry run scope, ideally variable hoisting but this is safer)
         const isDryrunCompact = !(SETTINGS.showAvatars || SETTINGS.showNames || SETTINGS.showMMR || SETTINGS.showBuilds || SETTINGS.showMainTimer || SETTINGS.showStages)
         let calcY = isDryrunCompact ? (5 * SETTINGS.scale) : (15 * SETTINGS.scale);
 
-        // 1. Top Section (Avatars, Names, MMR)
         let calcBuildStart = calcY;
         if (SETTINGS.focusRival) {
             if (SETTINGS.showAvatars) calcY += avSize + (10 * SETTINGS.scale)
@@ -409,14 +372,12 @@
             if (SETTINGS.showMMR) calcY += (20 * SETTINGS.scale)
             calcBuildStart = calcY + (6 * SETTINGS.scale)
         } else {
-            // Mirroring Standard Mode Logic
             if (SETTINGS.showAvatars) calcY += avSize + (6 * SETTINGS.scale)
             if (SETTINGS.showNames) calcY += (20 * SETTINGS.scale)
             if (SETTINGS.showMMR) calcY += (15 * SETTINGS.scale)
             calcBuildStart = calcY
         }
 
-        // 2. Builds
         let calcBuildHeight = 0
         if (SETTINGS.showBuilds) {
             const getBh = (b) => {
@@ -435,10 +396,6 @@
         let calcContentBottom = calcBuildStart
         if (calcBuildHeight > 0) calcContentBottom += calcBuildHeight
 
-        // 3. Main Timer
-        // Logic from drawing: boxY = contentBottom + 5. boxH = 24.
-        // If timer shown: currentY = boxY + boxH
-        // If hidden: currentY = contentBottom + 5
         let calcTimerEnd = calcContentBottom + (5 * SETTINGS.scale)
         if (SETTINGS.showMainTimer) {
             calcTimerEnd += (24 * SETTINGS.scale)
@@ -446,46 +403,26 @@
 
         let calcCurrentY = calcTimerEnd
 
-        // 4. Stages
         if (SETTINGS.showStages) {
-            // stageY = current + 12
-            // eventY = stageY + 18
-            // current = eventY
             calcCurrentY += (30 * SETTINGS.scale)
         }
-
-        // 5. Stats
         if (SETTINGS.showStats) {
-            // 5. Stats Dry Run
-            // Grid header gap logic
             const gridGap = isDryrunCompact ? (2 * SETTINGS.scale) : (15 * SETTINGS.scale)
 
-            // Adding: gap + header(1) + start_offset(24) + ...
             calcCurrentY += gridGap
-            calcCurrentY += (24 * SETTINGS.scale) // to Y_START
-
-            // Row 1
-            calcCurrentY += (58 * SETTINGS.scale) // ROW_HEIGHT
-            calcCurrentY += (5 * SETTINGS.scale) // Separator gap
-
-            // Row 2
+            calcCurrentY += (24 * SETTINGS.scale)
+            calcCurrentY += (58 * SETTINGS.scale)
+            calcCurrentY += (5 * SETTINGS.scale)
             calcCurrentY += (58 * SETTINGS.scale)
             calcCurrentY += (5 * SETTINGS.scale)
 
-            // Diff Row
             calcCurrentY += (45 * SETTINGS.scale)
-
-            // Bottom margin for stats (included in 45 essentially, but lets add 0 or small)
-            // calcCurrentY += (0 * SETTINGS.scale)
         }
-
-        // 6. Common Bans
         if (SETTINGS.showCommonBans && data.commonBans && data.commonBans.length > 0) {
-            calcCurrentY += (8 * SETTINGS.scale) // Reduce top gap
+            calcCurrentY += (8 * SETTINGS.scale)
             calcCurrentY += banSize
         }
 
-        // Use the same dynamic topPadding at the bottom for balance, or minimal if compact
         const bottomPadding = isDryrunCompact ? (5 * SETTINGS.scale) : (15 * SETTINGS.scale);
         const autoHeight = calcCurrentY + bottomPadding
         const currentW = SETTINGS.canvasWidth
@@ -515,14 +452,10 @@
         const W = currentW
         const CX = W / 2
 
-        // --- Layout Calculation ---
-        // Compact Mode: If all top elements are hidden, minimize padding
         const isCompactMode = !(SETTINGS.showAvatars || SETTINGS.showNames || SETTINGS.showMMR || SETTINGS.showBuilds || SETTINGS.showMainTimer || SETTINGS.showStages)
         const topPadding = isCompactMode ? (5 * SETTINGS.scale) : (15 * SETTINGS.scale)
 
         const GAP_SIDE = 10 * SETTINGS.scale
-        // avSize moved to top
-        // banVertGap moved to top
 
         let leftBanX, rightBanX
         let lAnchorX, rAnchorX
@@ -535,7 +468,6 @@
         const isFocus = SETTINGS.focusRival
 
         if (isFocus) {
-            // --- FOCUS RIVAL MODE ---
             rAnchorX = CX - (avSize / 2)
 
             lAnchorX = -9999
@@ -543,29 +475,23 @@
             rNameX = CX
             rAlign = 'center'
 
-            // Dynamic Vertical Layout for Focus Mode
             let currentFocusY = topPadding
 
             if (SETTINGS.showAvatars) {
-                // Avatars are drawn at currentFocusY
-                // Advance Y
                 currentFocusY += avSize + (10 * SETTINGS.scale)
             }
 
             if (SETTINGS.showNames) {
-                nameY = currentFocusY + (14 * SETTINGS.scale) // Use nameY for drawing
-                currentFocusY += (25 * SETTINGS.scale) // Approximate height of name line
+                nameY = currentFocusY + (14 * SETTINGS.scale)
+                currentFocusY += (25 * SETTINGS.scale)
             }
 
             if (SETTINGS.showMMR) {
-                mmrY = currentFocusY + (14 * SETTINGS.scale) // Use mmrY for drawing
-                currentFocusY += (20 * SETTINGS.scale) // Approximate height of MMR line
+                mmrY = currentFocusY + (14 * SETTINGS.scale)
+                currentFocusY += (20 * SETTINGS.scale)
             }
 
-            // Set the start of builds/timer based on where we ended up
             buildStartY = currentFocusY + (6 * SETTINGS.scale)
-
-            // Focus Mode Bans Position (Align with build start)
             leftBanX = topPadding
             rightBanX = W - topPadding - banSize
 
@@ -576,20 +502,8 @@
             else rightContentPad = 20 * SETTINGS.scale
 
         } else {
-            // --- STANDARD MODE (FIXED) ---
-
-            // Calculate anchors to push avatars to the edges
-            // Account for bans being on the "outside" if enabled
             const banW = (22 * SETTINGS.scale * SETTINGS.banScale)
-            // Fixed width reserved for bans + gap + separator
-            // We reserve this space ALWAYS so avatars don't shift
             const banReservedSpace = banW + (12 * SETTINGS.scale)
-
-            // Left Side: [Ban] | [Avatar] [Builds]
-            // Right Side: [Builds] [Avatar] | [Ban]
-
-            // Anchors for Avatars (Fixed Position)
-            // Anchors for Avatars (Fixed Position at Edges)
             lAnchorX = PADDING
             rAnchorX = W - PADDING - avSize
 
@@ -607,7 +521,6 @@
             lAlign = 'left'
             rAlign = 'right'
 
-            // Standard Mode Build Start Calculation
             let currentStdY = topPadding;
             if (SETTINGS.showAvatars) currentStdY += avSize + (6 * SETTINGS.scale)
             if (SETTINGS.showNames) currentStdY += (20 * SETTINGS.scale)
@@ -615,45 +528,32 @@
 
             buildStartY = currentStdY
 
-            // Bans Position (Fixed at Edges)
             leftBanX = PADDING
             rightBanX = W - PADDING - banW
-
-            // 4. Content Padding (For Builds & Stats)
             const banSepGap = 10 * SETTINGS.scale
 
             if (SETTINGS.showLeftBans) {
-                // Shift right by Ban Width + Gap
                 leftContentPad = leftBanX + banW + banSepGap
             } else {
-                // Align with Avatar outer edge (Screen Edge)
                 leftContentPad = lAnchorX
             }
 
             if (SETTINGS.showRightBans) {
-                // Shift left.
-                // Right Edge of content = rightBanX - banSepGap
                 const rightContentEnd = rightBanX - banSepGap
                 rightContentPad = W - rightContentEnd
             } else {
-                // Align with Avatar outer edge (Screen Edge)
-                // rAnchorX is left side of avatar. Right side is rAnchorX + avSize.
                 const rightContentEnd = rAnchorX + avSize
                 rightContentPad = W - rightContentEnd
             }
-
-            // 5. Vertical Separators
             if (SETTINGS.showBuilds) {
                 const sepY = buildStartY
                 const sepH = (2 * buildIconSize) + (2 * SETTINGS.scale) // approx height of 2 rows
                 ctx.strokeStyle = C.separator; ctx.lineWidth = 1
 
-                // Left Separator
                 if (SETTINGS.showLeftBans) {
                     const sepX = leftBanX + banW + (6 * SETTINGS.scale)
                     ctx.beginPath(); ctx.moveTo(sepX, sepY); ctx.lineTo(sepX, sepY + sepH); ctx.stroke()
                 }
-                // Right Separator
                 if (SETTINGS.showRightBans) {
                     const sepX = rightBanX - (6 * SETTINGS.scale)
                     ctx.beginPath(); ctx.moveTo(sepX, sepY); ctx.lineTo(sepX, sepY + sepH); ctx.stroke()
@@ -661,8 +561,6 @@
             }
         }
 
-
-        // --- 1. Player Bans (Moved down to align with builds) ---
         const drawVerticalBans = (bans, xPos, yStart) => {
             if (!bans || bans.length === 0) return
             bans.forEach((src, idx) => {
@@ -682,7 +580,6 @@
             drawVerticalBans(data.rBans, rightBanX, buildStartY)
         }
 
-        // --- 2. Avatars ---
         const drawAvatar = (img, x, y, status) => {
             if (!SETTINGS.showAvatars) return
             const r = 8 * SETTINGS.scale
@@ -721,14 +618,10 @@
             if (!isFocus) {
                 drawAvatar(imgCache.lAvatar, lAnchorX, topPadding, data.lStatus)
             }
-            // For focus mode we still use topPadding for avatar Y, as calculated in layout logic it starts at topPadding
             drawAvatar(imgCache.rAvatar, rAnchorX, topPadding, data.rStatus)
         }
 
-        // --- Names & MMR ---
         const maxNameW = (CX - (isFocus ? 0 : lNameX) - (20 * SETTINGS.scale))
-
-        // Check if any top elements are visible to decide on VS
         const isAnyTopVisible = SETTINGS.showAvatars || SETTINGS.showNames || SETTINGS.showMMR || SETTINGS.showBuilds || SETTINGS.showMainTimer || SETTINGS.showStages
 
         if (data.lRatingDiff === null && !isFocus && isAnyTopVisible) {
@@ -748,7 +641,6 @@
             }
             drawText(data.rMMR, rNameX, mmrY, 12, C.gold, rAlign, '600', maxNameW)
 
-            // Rating Diff
             if (data.lRatingDiff !== null) {
                 const rDiffColor = data.rRatingDiff > 0 ? C.green : C.red
                 const diffStr = (data.rRatingDiff > 0 ? "+" : "") + data.rRatingDiff
@@ -767,14 +659,10 @@
             }
         }
 
-        // --- 3. Builds & Layout ---
         let buildsBottomY = 0
 
-
-        // Standard Mode Dynamic Layout Logic
         if (!isFocus) {
             let currentStdY = topPadding;
-            // Removed fixed topPadding assignment, using the dynamic one calculated above
             if (SETTINGS.showAvatars) currentStdY += avSize + (6 * SETTINGS.scale)
             if (SETTINGS.showNames) currentStdY += (20 * SETTINGS.scale)
             if (SETTINGS.showMMR) currentStdY += (15 * SETTINGS.scale)
@@ -783,7 +671,6 @@
         }
 
         if (isFocus) {
-            // Already set in Focus block
         } else if (!SETTINGS.showAvatars) {
             buildStartY = mmrY + (12 * SETTINGS.scale)
         }
@@ -838,13 +725,10 @@
                     }
                 })
 
-                // Horizontal Separator between rows
                 if (rows.length > 1 && rowItems === rows[0] && rowItems.length > 0) {
                     const sepY = currentY + size + gap / 2
                     const lEdge = align === 'left' ? startX : (drawX)
-                    const w = (4 * size) + (3 * gap) // Max width
-                    // Or precise width based on content: const w = totalRowW 
-                    // Using variable width based on row content looks better for non-full rows:
+                    const w = (4 * size) + (3 * gap)
                     const lineX = drawX
                     const lineW = totalRowW
 
@@ -863,24 +747,17 @@
             if (!isFocus) {
                 lEnd = drawBuilds(data.lBuild, leftContentPad, buildStartY, 'left')
             }
-            // Derive start coordinate from Margin: W - Pad - avSize (for 'right' alignment logic that expects startX to be left edge of first icon... wait)
-            // drawBuilds logic for 'right': drawX = (startX + avSize) - totalRowW.
-            // We want rightmost pixel at (W - rightContentPad).
-            // So (startX + avSize) = W - rightContentPad.
-            // startX = W - rightContentPad - avSize.
             const rStartAnchor = isFocus ? CX : (W - rightContentPad - avSize)
             const rEnd = drawBuilds(data.rBuild, rStartAnchor, buildStartY, isFocus ? 'center' : 'right')
             buildsBottomY = Math.max(lEnd, rEnd)
         }
 
-        // --- 4. Main Timer ---
         let boxY = topPadding + (SETTINGS.showNames ? (38 * SETTINGS.scale) : 0) + (15 * SETTINGS.scale)
 
         if (isFocus) {
             const contentBottom = buildsBottomY > 0 ? buildsBottomY : buildStartY
             boxY = contentBottom + (5 * SETTINGS.scale)
         } else {
-            // Standard mode dynamic boxY
             const contentBottom = buildsBottomY > 0 ? buildsBottomY : buildStartY
             boxY = contentBottom + (5 * SETTINGS.scale)
         }
@@ -888,9 +765,6 @@
         const timerFont = `bold ${18 * SETTINGS.scale * (SETTINGS.textScale || 1.0)}px Segoe UI`
         ctx.font = timerFont
         const timeSampleW = ctx.measureText("00:00").width
-        // Box Width needs to accommodate two timers + padding + separator
-        // Fixed: 110 * Scale. Dynamic: (timeSampleW * 2) + (30 * scale) ?
-        // Let's use max of fixed and dynamic.
         const minBoxW = 110 * SETTINGS.scale
         const dynBoxW = (timeSampleW * 2.5) + (20 * SETTINGS.scale)
         const boxW = Math.max(minBoxW, dynBoxW)
@@ -900,7 +774,6 @@
 
         if (SETTINGS.showMainTimer) {
             if (data.lRatingDiff !== null) {
-                // RESULT BOX
                 let resText = t('draw')
                 let resColor = '#888'
                 if (data.lRatingDiff > 0) { resText = t('win'); resColor = C.green; }
@@ -937,7 +810,6 @@
                     if (isFocus) {
                         drawText(padTimer(data.rTime), CX, timeY, 18, rColor, 'center', 'bold')
                     } else {
-                        // Center each timer in its half
                         drawText(padTimer(data.lTime), boxX + (boxW * 0.25), timeY, 18, lColor, 'center', 'bold')
                         drawText(padTimer(data.rTime), boxX + (boxW * 0.75), timeY, 18, rColor, 'center', 'bold')
                         ctx.strokeStyle = '#555'; ctx.lineWidth = 1; ctx.beginPath()
@@ -947,15 +819,10 @@
             }
         }
 
-
-        // --- 5. Stages ---
         let currentY;
         if (SETTINGS.showMainTimer) {
             currentY = boxY + boxH
         } else {
-            // If timer is hidden, we continue from where we left off
-            // If builds present -> buildsBottomY
-            // If no builds -> buildStartY (which includes avatars/names/mmr heights)
             currentY = (buildsBottomY > 0 ? buildsBottomY : buildStartY) + (5 * SETTINGS.scale)
         }
 
@@ -976,10 +843,7 @@
             currentY = eventY
         }
 
-        // --- 6. Stats Table ---
         if (SETTINGS.showStats) {
-            // Check if top elements are hidden to reduce whitespace
-            // Rely on isCompactMode calculated at the top
             const gridGap = isCompactMode ? (2 * SETTINGS.scale) : (15 * SETTINGS.scale)
 
             const yGridHeader = currentY + gridGap
@@ -1006,8 +870,6 @@
 
                 const textY = yPos + (12 * SETTINGS.scale)
                 const lColor = lMain > rMain ? C.green : (lMain < rMain ? '#777' : '#fff')
-
-                // Relax center limit to push stats to sides but respect pads
                 const centerLimit = (W / 2) - (40 * SETTINGS.scale)
                 const lStatX = Math.max(leftContentPad, CX - centerLimit)
                 const rStatX = Math.min(W - rightContentPad, CX + centerLimit)
@@ -1037,9 +899,6 @@
             drawText(diffStr, CX, dY + (14 * SETTINGS.scale), 13, dColorD, 'center', 'bold')
             const diffTextY = Y_DIFF + (12 * SETTINGS.scale)
 
-
-
-            // Relax center limit for diffs too
             const centerLimitDiff = (W / 2) - (40 * SETTINGS.scale)
             const lStatDiffX = Math.max(leftContentPad, CX - centerLimitDiff)
             const rStatDiffX = Math.min(W - rightContentPad, CX + centerLimitDiff)
@@ -1052,7 +911,6 @@
             currentY = Y_DIFF + (45 * SETTINGS.scale)
         }
 
-        // --- 7. Common Bans ---
         if (SETTINGS.showCommonBans && data.commonBans && data.commonBans.length > 0) {
             const commonBanSize = banSize
             const gap = banGap
@@ -1075,7 +933,6 @@
 
     }
 
-    // --- SETUP ---
     function initSystem() {
         canvas = document.createElement('canvas')
         canvas.width = SETTINGS.canvasWidth
@@ -1289,7 +1146,6 @@
         } catch (err) { console.error(err) }
     }
 
-    // --- LOOP ---
     function updateLoop() {
         const leftCol = document.querySelector('.lobby-page__player-column--left')
         if (!leftCol) return
