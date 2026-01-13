@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         MegaLadder Stats Overlay
 // @namespace    http://tampermonkey.net/
-// @version      1.1
+// @version      1.0
 // @description  Overlay for MegaLadder, GAZ. Supports PiP mode for overlaying on game screen.
 // @author       21twentyone
 // @license      MIT
@@ -28,6 +28,7 @@
 
         separateTimers: JSON.parse(localStorage.getItem('ml_pip_separate_timers') ?? 'false'),
         showStages: JSON.parse(localStorage.getItem('ml_pip_show_stages') ?? 'true'),
+        showEventTimers: JSON.parse(localStorage.getItem('ml_pip_show_event_timers') ?? 'true'),
         showLeftBans: JSON.parse(localStorage.getItem('ml_pip_show_left_bans') ?? 'true'),
         showRightBans: JSON.parse(localStorage.getItem('ml_pip_show_right_bans') ?? 'true'),
         showCommonBans: JSON.parse(localStorage.getItem('ml_pip_show_common_bans') ?? 'true'),
@@ -54,7 +55,8 @@
             mmr: 'MMR',
             builds: 'Билды',
             main_timer: 'Главный Таймер',
-            stages: 'Этапы и События',
+            stages: 'Номера Этапов',
+            event_timers: 'Таймеры Событий',
             my_bans: 'Мои баны',
             enemy_bans: 'Баны врага',
             common_bans: 'Общие баны',
@@ -95,7 +97,8 @@
             mmr: 'MMR',
             builds: 'Builds',
             main_timer: 'Main Timer',
-            stages: 'Stages & Events',
+            stages: 'Stage Numbers',
+            event_timers: 'Event Timers',
             my_bans: 'My Bans',
             enemy_bans: 'Enemy Bans',
             common_bans: 'Common Bans',
@@ -281,7 +284,7 @@
     }
     function getNextEvent(stageNum, currentGlobalTime) {
         const end = getStageEndTime(stageNum)
-        const rem = currentGlobalTime - end
+        const rem = currentGlobalTime - end + 0.05
         if (rem <= 0.05) return { text: t('final'), color: '#ff6b6b' }
         const next = EVENTS.find(e => e.time <= rem)
         if (!next) return { text: '', color: '#888' }
@@ -289,7 +292,7 @@
         let eventName = next.name
         if (eventName === 'Мини-Босс') eventName = t('miniboss')
         if (eventName === 'Орда') eventName = t('swarm')
-        if (eventName === 'ЛАСТ ОРДА') eventName = t('final')
+        if (eventName === 'Ласт орда') eventName = t('final')
 
         const diff = rem - next.time
         if (diff <= 0.15) return { text: `⚡ ${eventName}`, color: next.color }
@@ -826,21 +829,35 @@
             currentY = (buildsBottomY > 0 ? buildsBottomY : buildStartY) + (5 * SETTINGS.scale)
         }
 
-        if (SETTINGS.showStages) {
+        if (SETTINGS.showStages || SETTINGS.showEventTimers) {
             const stageY = currentY + (12 * SETTINGS.scale)
             const eventY = stageY + (18 * SETTINGS.scale)
 
             if (!isFocus) {
-                drawText(`${t('stage')} ${data.lStage}`, leftContentPad, stageY, 14, '#fff', 'left', 'bold')
-                drawText(data.lEvent.text, leftContentPad, eventY, 12, data.lEvent.color, 'left', '600')
-                drawText(`${t('stage')} ${data.rStage}`, W - rightContentPad, stageY, 14, '#fff', 'right', 'bold')
-                drawText(data.rEvent.text, W - rightContentPad, eventY, 12, data.rEvent.color, 'right', '600')
+                if (SETTINGS.showStages) {
+                    drawText(`${t('stage')} ${data.lStage}`, leftContentPad, stageY, 14, '#fff', 'left', 'bold')
+                    drawText(`${t('stage')} ${data.rStage}`, W - rightContentPad, stageY, 14, '#fff', 'right', 'bold')
+                }
+                if (SETTINGS.showEventTimers) {
+                    const evY = SETTINGS.showStages ? eventY : (currentY + (12 * SETTINGS.scale))
+                    drawText(data.lEvent.text, leftContentPad, evY, 12, data.lEvent.color, 'left', '600')
+                    drawText(data.rEvent.text, W - rightContentPad, evY, 12, data.rEvent.color, 'right', '600')
+                    currentY = evY
+                } else {
+                    currentY = stageY
+                }
             } else {
-                drawText(`${t('stage')} ${data.rStage}`, CX, stageY, 14, '#fff', 'center', 'bold')
-                drawText(data.rEvent.text, CX, eventY, 12, data.rEvent.color, 'center', '600')
+                if (SETTINGS.showStages) {
+                    drawText(`${t('stage')} ${data.rStage}`, CX, stageY, 14, '#fff', 'center', 'bold')
+                }
+                if (SETTINGS.showEventTimers) {
+                    const evY = SETTINGS.showStages ? eventY : (currentY + (12 * SETTINGS.scale))
+                    drawText(data.rEvent.text, CX, evY, 12, data.rEvent.color, 'center', '600')
+                    currentY = evY
+                } else {
+                    currentY = stageY
+                }
             }
-
-            currentY = eventY
         }
 
         if (SETTINGS.showStats) {
@@ -998,6 +1015,7 @@
             { id: 'showBuilds', label: t('builds') },
             { id: 'showMainTimer', label: t('main_timer') },
             { id: 'showStages', label: t('stages') },
+            { id: 'showEventTimers', label: t('event_timers') },
             { id: 'showLeftBans', label: t('my_bans') },
             { id: 'showRightBans', label: t('enemy_bans') },
             { id: 'showCommonBans', label: t('common_bans') },
@@ -1109,6 +1127,7 @@
             'showMMR': 'show_mmr',
             'separateTimers': 'separate_timers',
             'showStages': 'show_stages',
+            'showEventTimers': 'show_event_timers',
             'showLeftBans': 'show_left_bans',
             'showRightBans': 'show_right_bans',
             'showCommonBans': 'show_common_bans',
