@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         MegaLadder Stats Overlay
 // @namespace    http://tampermonkey.net/
-// @version      1.1
+// @version      1.0
 // @description  Overlay for MegaLadder, GAZ. Supports PiP mode for overlaying on game screen.
 // @author       21twentyone
 // @license      MIT
