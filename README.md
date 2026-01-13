@@ -37,16 +37,16 @@
 ## Скриншоты / Screenshots
 
 #### Общий вид / Overview
-![Full Overlay](file:///C:/Users/2702t/.gemini/antigravity/brain/819e84ff-ccc8-4a85-866b-23a5821be8ba/uploaded_image_0_1768321253403.png)
+![Full Overlay](screenshots/full_overlay.png)
 
 #### Сравнение статов / Stats Comparison
-![Stats](file:///C:/Users/2702t/.gemini/antigravity/brain/819e84ff-ccc8-4a85-866b-23a5821be8ba/uploaded_image_1_1768321329397.png)
+![Stats](screenshots/stats.png)
 
 #### Мини-режим / Full Focus Mode
-![Tiny Square](file:///C:/Users/2702t/.gemini/antigravity/brain/819e84ff-ccc8-4a85-866b-23a5821be8ba/uploaded_image_1_1768321253403.png)
+![Tiny Square](screenshots/tiny_mode.png)
 
 #### Меню настроек / Settings & Visibility
-![Visibility & Settings](file:///C:/Users/2702t/.gemini/antigravity/brain/819e84ff-ccc8-4a85-866b-23a5821be8ba/uploaded_image_3_1768321253403.png)
+![Visibility & Settings](screenshots/settings.png)
 
 ---
 
