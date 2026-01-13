@@ -67,6 +67,70 @@
     - **ВИДИМОСТЬ**: Настройка отображаемых элементов (аватары, билды, баны).
     - **НАСТРОЙКИ**: Выбор языка, масштаба текста и иконок.
 
+> 💡 **Совет:** Вы можете настроить оверлей перед игрой, зайдя в любое лобби на вкладке [Watch Now](https://ladder.megabonk.su/ladder?tab=watchNow). Это позволит подобрать оптимальные настройки размера, прозрачности и отображаемых элементов.
+
+---
+
+## Функции и возможности / Features & Capabilities
+
+### 🎮 Режимы отображения / Display Modes
+
+#### Полный режим / Full Mode
+- **Аватары игроков** — отображение аватаров с индикацией победы/поражения
+- **Имена и MMR** — никнеймы игроков и их рейтинг с изменениями
+- **Билды** — оружие и тома с уровнями прокачки
+- **Баны** — персональные и общие баны героев
+- **Статистика** — убийства, уровень, сложность с показателями в минуту
+- **Таймеры** — время игры и события (орды, мини-боссы)
+- **Этапы** — текущий этап и предстоящие события
+
+#### Режим фокуса на сопернике / Focus Rival Mode
+- Отображение только статистики противника
+- Компактное вертикальное расположение
+- Идеально для узких экранов
+
+#### Полный фокус / Full Focus Mode
+- **Ультра-компактный режим** (60x60 пикселей)
+- Только разница в ключевых показателях:
+  - 🎯 **KILL** — разница в убийствах
+  - 📊 **LEVEL** — разница в уровнях
+  - 💪 **DIFF %** — разница в сложности
+- Цветовая индикация (зелёный = преимущество, красный = отставание)
+
+### ⚙️ Настройки / Settings
+
+#### Видимость элементов / Element Visibility
+- ✅ Аватары игроков / Player Avatars
+- ✅ Имена / Names
+- ✅ MMR рейтинг / MMR Rating
+- ✅ Билды (оружие и тома) / Builds (weapons & tomes)
+- ✅ Главный таймер / Main Timer
+- ✅ Этапы и события / Stages & Events
+- ✅ Мои баны / My Bans
+- ✅ Баны врага / Enemy Bans
+- ✅ Общие баны / Common Bans
+- ✅ Таблица статистики / Stats Table
+
+#### Параметры отображения / Display Parameters
+- 📏 **Размер текста** — от 0.5x до 2.5x
+- 🖼️ **Размер иконок билда** — от 0.5x до 2.0x
+- 🚫 **Размер иконок бана** — от 0.5x до 2.0x
+- 📐 **Ширина окна** — от 400 до 1000 пикселей
+- 📏 **Высота окна** — от 20 до 2000 пикселей (авто-расчёт)
+- 👁️ **Прозрачность** — от 0.1 до 1.0
+
+#### Дополнительные опции / Additional Options
+- 🌍 **Язык** — переключение между RU/EN
+- ⏱️ **Раздельные таймеры** — отдельные таймеры для каждого игрока
+- 🎯 **Режим фокуса** — отображение только противника
+- 🔲 **Полный фокус** — минималистичный квадратный режим
+
+### 🖼️ Picture-in-Picture (PiP)
+- Размещение окна статистики **поверх игры**
+- Перемещение и изменение размера окна
+- Работает во всех современных браузерах
+- Автоматическое обновление каждую секунду
+
 ---
 
 ## Installation Guide
@@ -91,3 +155,77 @@
     - **ACTIVE / OPEN**: Toggle Picture-in-Picture (PiP) mode.
     - **VISIBILITY**: Customize visible elements (avatars, builds, bans).
     - **SETTINGS**: Change language, text scale, and icon sizes.
+
+> 💡 **Tip:** You can configure the overlay before playing by visiting any lobby on the [Watch Now](https://ladder.megabonk.su/ladder?tab=watchNow) tab. This allows you to fine-tune size, opacity, and visible elements.
+
+---
+
+## Features & Capabilities
+
+### 🎮 Display Modes
+
+#### Full Mode
+- **Player Avatars** — display avatars with win/loss indicators
+- **Names and MMR** — player nicknames and rating with changes
+- **Builds** — weapons and tomes with upgrade levels
+- **Bans** — personal and common hero bans
+- **Statistics** — kills, level, difficulty with per-minute metrics
+- **Timers** — game time and events (swarms, mini-bosses)
+- **Stages** — current stage and upcoming events
+
+#### Focus Rival Mode
+- Display only opponent's statistics
+- Compact vertical layout
+- Perfect for narrow screens
+
+#### Full Focus Mode
+- **Ultra-compact mode** (60x60 pixels)
+- Only key metric differences:
+  - 🎯 **KILL** — kill difference
+  - 📊 **LEVEL** — level difference
+  - 💪 **DIFF %** — difficulty difference
+- Color indicators (green = advantage, red = behind)
+
+### ⚙️ Settings
+
+#### Element Visibility
+- ✅ Player Avatars
+- ✅ Names
+- ✅ MMR Rating
+- ✅ Builds (weapons & tomes)
+- ✅ Main Timer
+- ✅ Stages & Events
+- ✅ My Bans
+- ✅ Enemy Bans
+- ✅ Common Bans
+- ✅ Stats Table
+
+#### Display Parameters
+- 📏 **Text Size** — from 0.5x to 2.5x
+- 🖼️ **Build Icon Size** — from 0.5x to 2.0x
+- 🚫 **Ban Icon Size** — from 0.5x to 2.0x
+- 📐 **Window Width** — from 400 to 1000 pixels
+- 📏 **Window Height** — from 20 to 2000 pixels (auto-calculated)
+- 👁️ **Opacity** — from 0.1 to 1.0
+
+#### Additional Options
+- 🌍 **Language** — switch between RU/EN
+- ⏱️ **Separate Timers** — individual timers for each player
+- 🎯 **Focus Mode** — display only opponent
+- 🔲 **Full Focus** — minimalist square mode
+
+### 🖼️ Picture-in-Picture (PiP)
+- Place stats window **over the game**
+- Move and resize the window
+- Works in all modern browsers
+- Auto-updates every second
+
+---
+
+## License
+
+MIT License - see [LICENSE](LICENSE) file for details.
+
+---
+
+**Made with ❤️ for the MegaLadder community**
