@@ -1170,8 +1170,10 @@
             const rKills = parseComplexNumber(document.querySelectorAll('.kills-comparison__kills')[1]?.textContent || '0')
             const lDiff = parseComplexNumber(leftCol.querySelector('.run-card__summary-item--difficulty .run-card__summary-value')?.textContent || '0')
             const rDiff = parseComplexNumber(rightCol.querySelector('.run-card__summary-item--difficulty .run-card__summary-value')?.textContent || '0')
-            const lLvl = parseLevel(leftCol.querySelector('.run-card__hero-level')?.textContent || '1')
-            const rLvl = parseLevel(rightCol.querySelector('.run-card__hero-level')?.textContent || '1')
+            const lLvlText = leftCol.querySelector('.run-card__hero-level')?.textContent
+            const rLvlText = rightCol.querySelector('.run-card__hero-level')?.textContent
+            const lLvl = lLvlText ? parseLevel(lLvlText) : 0
+            const rLvl = rLvlText ? parseLevel(rLvlText) : 0
             const lStage = parseInt((leftCol.querySelector('.run-card__stage')?.textContent || '1').replace(/\D/g, '')) || 1
             const rStage = parseInt((rightCol.querySelector('.run-card__stage')?.textContent || '1').replace(/\D/g, '')) || 1
 
