@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         MegaLadder Stats Overlay
 // @namespace    http://tampermonkey.net/
-// @version      1.0
+// @version      1.1
 // @description  Overlay for MegaLadder, GAZ. Supports PiP mode for overlaying on game screen.
 // @author       21twentyone
 // @license      MIT
@@ -52,7 +52,7 @@
             avatars: 'Аватары',
             names: 'Имена',
             mmr: 'MMR',
-            builds: 'Билды (New)',
+            builds: 'Билды',
             main_timer: 'Главный Таймер',
             stages: 'Этапы и События',
             my_bans: 'Мои баны',
@@ -93,7 +93,7 @@
             avatars: 'Avatars',
             names: 'Names',
             mmr: 'MMR',
-            builds: 'Builds (New)',
+            builds: 'Builds',
             main_timer: 'Main Timer',
             stages: 'Stages & Events',
             my_bans: 'My Bans',
@@ -189,7 +189,7 @@
             box-shadow: 0 4px 20px rgba(0,0,0,0.5);
             font-family: 'Segoe UI', sans-serif; font-size: 12px; color: #ccc;
         }
-        body:hover #ml-control-panel, #ml-control-panel:hover, #ml-control-panel.locked {
+        #ml-control-panel:hover, #ml-control-panel.locked {
             transform: translateX(-50%) translateY(0);
         }
         .ml-main-btn {
@@ -1159,21 +1159,21 @@
             if (lImgSrc !== imgCache.lSrc) { imgCache.lSrc = lImgSrc; imgCache.lAvatar.src = lImgSrc; }
             if (rImgSrc !== imgCache.rSrc) { imgCache.rSrc = rImgSrc; imgCache.rAvatar.src = rImgSrc; }
 
-            const lName = leftCol.querySelector('.player-row__nickname').textContent || 'You'
-            const rName = rightCol.querySelector('.player-row__nickname').textContent || 'Enemy'
-            const lMMR = leftCol.querySelector('.player-row__rating-value').textContent || ''
-            const rMMR = rightCol.querySelector('.player-row__rating-value').textContent || ''
-            const lTimer = leftCol.querySelector('.run-card__timer-value').textContent || '45:00'
-            const rTimer = rightCol.querySelector('.run-card__timer-value').textContent || '45:00'
+            const lName = leftCol.querySelector('.player-row__nickname')?.textContent || 'You'
+            const rName = rightCol.querySelector('.player-row__nickname')?.textContent || 'Enemy'
+            const lMMR = leftCol.querySelector('.player-row__rating-value')?.textContent || ''
+            const rMMR = rightCol.querySelector('.player-row__rating-value')?.textContent || ''
+            const lTimer = leftCol.querySelector('.run-card__timer-value')?.textContent || '45:00'
+            const rTimer = rightCol.querySelector('.run-card__timer-value')?.textContent || '45:00'
 
-            const lKills = parseComplexNumber(document.querySelectorAll('.kills-comparison__kills')[0].textContent)
-            const rKills = parseComplexNumber(document.querySelectorAll('.kills-comparison__kills')[1].textContent)
-            const lDiff = parseComplexNumber(leftCol.querySelector('.run-card__summary-item--difficulty .run-card__summary-value').textContent)
-            const rDiff = parseComplexNumber(rightCol.querySelector('.run-card__summary-item--difficulty .run-card__summary-value').textContent)
-            const lLvl = parseLevel(leftCol.querySelector('.run-card__hero-level').textContent)
-            const rLvl = parseLevel(rightCol.querySelector('.run-card__hero-level').textContent)
-            const lStage = parseInt((leftCol.querySelector('.run-card__stage').textContent || '1').replace(/\D/g, '')) || 1
-            const rStage = parseInt((rightCol.querySelector('.run-card__stage').textContent || '1').replace(/\D/g, '')) || 1
+            const lKills = parseComplexNumber(document.querySelectorAll('.kills-comparison__kills')[0]?.textContent || '0')
+            const rKills = parseComplexNumber(document.querySelectorAll('.kills-comparison__kills')[1]?.textContent || '0')
+            const lDiff = parseComplexNumber(leftCol.querySelector('.run-card__summary-item--difficulty .run-card__summary-value')?.textContent || '0')
+            const rDiff = parseComplexNumber(rightCol.querySelector('.run-card__summary-item--difficulty .run-card__summary-value')?.textContent || '0')
+            const lLvl = parseLevel(leftCol.querySelector('.run-card__hero-level')?.textContent || '1')
+            const rLvl = parseLevel(rightCol.querySelector('.run-card__hero-level')?.textContent || '1')
+            const lStage = parseInt((leftCol.querySelector('.run-card__stage')?.textContent || '1').replace(/\D/g, '')) || 1
+            const rStage = parseInt((rightCol.querySelector('.run-card__stage')?.textContent || '1').replace(/\D/g, '')) || 1
 
             const lGT = parseTime(lTimer)
             const rGT = parseTime(rTimer)
