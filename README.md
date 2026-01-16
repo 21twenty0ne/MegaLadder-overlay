@@ -32,9 +32,10 @@
 > **Нет.** Это браузерное расширение, которое работает исключительно как оверлей и **не взаимодействует с файлами игры**.
 > _Безопасность использования подтверждена в личном диалоге с администрацией ладдера._
 >
+> ![Подтверждение безопасности 2](screenshots/safety_confirmation_2.png)
+>
 > ![Подтверждение безопасности](screenshots/safety_confirmation.png)
 >
-> ![Подтверждение безопасности 2](screenshots/safety_confirmation_2.png)
 
 
 <table><tr><td style="border: 2px solid #5865F2; padding: 10px; background-color: #e8eaff; color: #000000;">
