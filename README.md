@@ -34,13 +34,14 @@
 >
 > ![Подтверждение безопасности](screenshots/safety_confirmation.png)
 
-### 📞 Обратная связь / Contact
 
-Если у вас возникли вопросы, проблемы с установкой или есть предложения по улучшению:  
-✍️ Напишите мне в Discord: **`21twentyone`**
-
-Have questions, installation issues, or feature suggestions?  
-✍️ Message me on Discord: **`21twentyone`**
+<table><tr><td style="border: 2px solid #5865F2; padding: 10px; background-color: #e8eaff; color: #000000;">
+📞 <b>Обратная связь / Contact</b><br><br>
+Если у вас возникли вопросы, проблемы с установкой или есть предложения по улучшению:<br>
+✍️ Напишите мне в Discord: <b><a href="https://discord.com/users/284006001575854080"><code>21twentyone</code></a></b><br><br>
+Have questions, installation issues, or feature suggestions?<br>
+✍️ Message me on Discord: <b><a href="https://discord.com/users/284006001575854080"><code>21twentyone</code></a></b>
+</td></tr></table>
 
 ---
 
@@ -97,10 +98,12 @@ Have questions, installation issues, or feature suggestions?
     - **ВИДИМОСТЬ**: Настройка отображаемых элементов (аватары, билды, баны).
     - **НАСТРОЙКИ**: Выбор языка, масштаба текста и иконок.
 
-> 💡 **Совет:** Вы можете настроить оверлей перед игрой, зайдя в любое лобби на вкладке [Watch Now](https://ladder.megabonk.su/ladder?tab=watchNow). Это позволит подобрать оптимальные настройки размера, прозрачности и отображаемых элементов.
->
-> [!WARNING]
-> **Режимы Full Focus и Focus Mode** ограничивают функциональность некоторых настроек. Для полного понимания всех возможностей оверлея рекомендуется сначала поэкспериментировать с настройками **без включения этих режимов**.
+<table><tr><td style="border: 2px solid #0066cc; padding: 10px; background-color: #cce5ff; color: #000000;">
+💡 <b>Совет:</b> Вы можете настроить оверлей перед игрой, зайдя в любое лобби на вкладке <a href="https://ladder.megabonk.su/ladder?tab=watchNow">Watch Now</a>. Это позволит подобрать оптимальные настройки размера, прозрачности и отображаемых элементов.
+</td></tr></table>
+<table><tr><td style="border: 2px solid #ff0000; padding: 10px; background-color: #ffcccc; color: #000000;">
+⚠️ <b>ВАЖНО:</b> Режимы <b>Full Focus</b> и <b>Focus Mode</b> ограничивают функциональность некоторых настроек. Для полного понимания всех возможностей оверлея рекомендуется сначала поэкспериментировать с настройками <b>без включения этих режимов</b>.
+</td></tr></table>
 
 ---
 
@@ -203,10 +206,12 @@ Have questions, installation issues, or feature suggestions?
     - **VISIBILITY**: Customize visible elements (avatars, builds, bans).
     - **SETTINGS**: Change language, text scale, and icon sizes.
 
-> 💡 **Tip:** You can configure the overlay before playing by visiting any lobby on the [Watch Now](https://ladder.megabonk.su/ladder?tab=watchNow) tab. This allows you to fine-tune size, opacity, and visible elements.
->
-> [!WARNING]
-> **Full Focus and Focus Mode** limit the functionality of some settings. To fully understand all overlay capabilities, it's recommended to experiment with settings **without enabling these modes first**.
+<table><tr><td style="border: 2px solid #0066cc; padding: 10px; background-color: #cce5ff; color: #000000;">
+💡 <b>Tip:</b> You can configure the overlay before playing by visiting any lobby on the <a href="https://ladder.megabonk.su/ladder?tab=watchNow">Watch Now</a> tab. This allows you to fine-tune size, opacity, and visible elements.
+</td></tr></table>
+<table><tr><td style="border: 2px solid #ff0000; padding: 10px; background-color: #ffcccc; color: #000000;">
+⚠️ <b>IMPORTANT:</b> <b>Full Focus</b> and <b>Focus Mode</b> limit the functionality of some settings. To fully understand all overlay capabilities, it's recommended to experiment with settings <b>without enabling these modes first</b>.
+</td></tr></table>
 
 ---
 
