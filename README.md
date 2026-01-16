@@ -33,6 +33,8 @@
 > _Безопасность использования подтверждена в личном диалоге с администрацией ладдера._
 >
 > ![Подтверждение безопасности](screenshots/safety_confirmation.png)
+>
+> ![Подтверждение безопасности 2](screenshots/safety_confirmation_2.png)
 
 
 <table><tr><td style="border: 2px solid #5865F2; padding: 10px; background-color: #e8eaff; color: #000000;">
@@ -98,9 +100,9 @@ Have questions, installation issues, or feature suggestions?<br>
     - **ВИДИМОСТЬ**: Настройка отображаемых элементов (аватары, билды, баны).
     - **НАСТРОЙКИ**: Выбор языка, масштаба текста и иконок.
 
-![Кнопки управления](screenshots/usage_buttons.png)
-
 ![Пример в лобби](screenshots/usage_lobby.png)
+
+![Кнопки управления](screenshots/usage_buttons.png)
 
 <table><tr><td style="border: 2px solid #0066cc; padding: 10px; background-color: #cce5ff; color: #000000;">
 💡 <b>Совет:</b> Вы можете настроить оверлей перед игрой, зайдя в любое лобби на вкладке <a href="https://ladder.megabonk.su/ladder?tab=watchNow">Watch Now</a>. Это позволит подобрать оптимальные настройки размера, прозрачности и отображаемых элементов.
@@ -210,9 +212,9 @@ Have questions, installation issues, or feature suggestions?<br>
     - **VISIBILITY**: Customize visible elements (avatars, builds, bans).
     - **SETTINGS**: Change language, text scale, and icon sizes.
 
-![Control Buttons](screenshots/usage_buttons.png)
-
 ![Lobby Example](screenshots/usage_lobby.png)
+
+![Control Buttons](screenshots/usage_buttons.png)
 
 <table><tr><td style="border: 2px solid #0066cc; padding: 10px; background-color: #cce5ff; color: #000000;">
 💡 <b>Tip:</b> You can configure the overlay before playing by visiting any lobby on the <a href="https://ladder.megabonk.su/ladder?tab=watchNow">Watch Now</a> tab. This allows you to fine-tune size, opacity, and visible elements.
