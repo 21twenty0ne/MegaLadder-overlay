@@ -112,6 +112,31 @@ Have questions, installation issues, or feature suggestions?<br>
 ⚠️ <b>ВАЖНО:</b> Режимы <b>Full Focus</b> и <b>Focus Mode</b> ограничивают функциональность некоторых настроек. Для полного понимания всех возможностей оверлея рекомендуется сначала поэкспериментировать с настройками <b>без включения этих режимов</b>.
 </td></tr></table>
 
+### ❗ Частые проблемы при установке
+
+#### Проблема 1: Tampermonkey просит включить режим разработчика
+
+Если при открытии меню Tampermonkey вы видите сообщение **"Пожалуйста, включите режим разработчика..."**:
+
+![Запрос режима разработчика](screenshots/troubleshoot_developer_mode.png)
+
+**Решение:** Включите режим разработчика в настройках расширений браузера (см. [Шаг 2](#способ-1-через-greasyfork-рекомендуется) инструкции по установке).
+
+---
+
+#### Проблема 2: Оверлей всё ещё не работает
+
+Если вы включили режим разработчика, но оверлей всё равно не появляется, попробуйте включить **"Разрешить пользовательские скрипты"** в настройках расширения Tampermonkey:
+
+1. Откройте страницу расширений браузера (`chrome://extensions/` или аналогичную)
+2. Найдите **Tampermonkey** и нажмите кнопку **"Сведения"** (Details)
+   
+   ![Кнопка Сведения](screenshots/troubleshoot_extension_details.png)
+
+3. Включите опцию **"Разрешить пользовательские скрипты"**
+   
+   ![Разрешить пользовательские скрипты](screenshots/troubleshoot_allow_scripts.png)
+
 ---
 
 ## Функции и возможности / Features & Capabilities
@@ -223,6 +248,31 @@ Have questions, installation issues, or feature suggestions?<br>
 <table><tr><td style="border: 2px solid #ff0000; padding: 10px; background-color: #ffcccc; color: #000000;">
 ⚠️ <b>IMPORTANT:</b> <b>Full Focus</b> and <b>Focus Mode</b> limit the functionality of some settings. To fully understand all overlay capabilities, it's recommended to experiment with settings <b>without enabling these modes first</b>.
 </td></tr></table>
+
+### ❗ Common Installation Issues
+
+#### Issue 1: Tampermonkey asks to enable Developer Mode
+
+If you see a message like **"Please enable Developer Mode..."** when opening the Tampermonkey menu:
+
+![Developer Mode Request](screenshots/troubleshoot_developer_mode.png)
+
+**Solution:** Enable Developer Mode in your browser's extension settings (see [Step 2](#method-1-via-greasyfork-recommended) in the installation guide).
+
+---
+
+#### Issue 2: Overlay still not working
+
+If you've enabled Developer Mode but the overlay still doesn't appear, try enabling **"Allow user scripts"** in Tampermonkey's extension settings:
+
+1. Open your browser's extensions page (`chrome://extensions/` or similar)
+2. Find **Tampermonkey** and click the **"Details"** button
+   
+   ![Details Button](screenshots/troubleshoot_extension_details.png)
+
+3. Enable the **"Allow user scripts"** option
+   
+   ![Allow User Scripts](screenshots/troubleshoot_allow_scripts.png)
 
 ---
 
