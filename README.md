@@ -26,6 +26,12 @@
 - 📊 **Детальная статистика** — аватары, билды, баны, таймеры событий
   - 📊 **Detailed Stats** — avatars, builds, bans, event timers
 
+<table><tr><td style="border: 2px solid #ff0000; padding: 10px; background-color: #ffcccc; color: #000000;">
+❌ <b>Firefox не поддерживается / Firefox is NOT supported</b><br><br>
+Режим Picture-in-Picture (PiP) работает только в Chrome-браузерах: Chrome, Edge, Opera, Vivaldi, Yandex Browser и других.<br>
+<i>PiP mode only works in Chrome-based browsers: Chrome, Edge, Opera, Vivaldi, Yandex Browser and others.</i>
+</td></tr></table>
+
 ## 🛡️ Безопасность и Поддержка / Safety & Support
 
 > **⚠️ Банят ли за использование?**
@@ -70,15 +76,13 @@ Have questions, installation issues, or feature suggestions?<br>
 
 ### Способ 1: Через GreasyFork (рекомендуется)
 1. Установите расширение **Tampermonkey** для вашего браузера:
-   - [Tampermonkey для Chrome / Edge / Yandex / Vivaldi / etc](https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo)
-   - [Tampermonkey для Firefox](https://addons.mozilla.org/en-US/firefox/addon/tampermonkey/)
+   - [Tampermonkey для Chrome / Edge / Yandex / Vivaldi / Opera](https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo)
 
 2. **Включите режим разработчика**:
    - Откройте страницу расширений браузера:
      - Chrome/Edge: `chrome://extensions/`
-     - Firefox: `about:addons`
      - Opera: `opera://extensions/`
-   - Или используйте горячие клавиши: `Ctrl + Shift + E` (Chrome/Edge), `Ctrl + Shift + A` (Firefox)
+   - Или используйте горячие клавиши: `Ctrl + Shift + E` (Chrome/Edge)
    - Включите **"Режим разработчика"** (Developer Mode)
    
    ![Режим разработчика](screenshots/extensions%20screen.jpg)
@@ -100,13 +104,14 @@ Have questions, installation issues, or feature suggestions?<br>
     - **АКТИВЕН / ОТКРЫТЬ**: Управление режимом "Картинка в картинке" (PiP).
     - **ВИДИМОСТЬ**: Настройка отображаемых элементов (аватары, билды, баны).
     - **НАСТРОЙКИ**: Выбор языка, масштаба текста и иконок.
+    - **🧪 ТЕСТ**: Тестовый режим для настройки оверлея без активной игры.
 
 ![Пример в лобби](screenshots/usage_lobby.png)
 
 ![Кнопки управления](screenshots/usage_buttons.png)
 
 <table><tr><td style="border: 2px solid #0066cc; padding: 10px; background-color: #cce5ff; color: #000000;">
-💡 <b>Совет:</b> Вы можете настроить оверлей перед игрой, зайдя в любое лобби на вкладке <a href="https://ladder.megabonk.su/ladder?tab=watchNow">Watch Now</a>. Это позволит подобрать оптимальные настройки размера, прозрачности и отображаемых элементов.
+💡 <b>Совет:</b> Используйте кнопку <b>🧪 ТЕСТ</b> для настройки оверлея с тестовыми данными без необходимости заходить в реальное лобби. Это позволит подобрать оптимальные настройки размера, прозрачности и отображаемых элементов.
 </td></tr></table>
 <table><tr><td style="border: 2px solid #ff0000; padding: 10px; background-color: #ffcccc; color: #000000;">
 ⚠️ <b>ВАЖНО:</b> Режимы <b>Full Focus</b> и <b>Focus Mode</b> ограничивают функциональность некоторых настроек. Для полного понимания всех возможностей оверлея рекомендуется сначала поэкспериментировать с настройками <b>без включения этих режимов</b>.
@@ -196,7 +201,8 @@ Have questions, installation issues, or feature suggestions?<br>
 ### 🖼️ Picture-in-Picture (PiP)
 - Размещение окна статистики **поверх игры**
 - Перемещение и изменение размера окна
-- Работает во всех современных браузерах
+- ⚠️ **Только Chrome-браузеры**: Chrome, Edge, Opera, Vivaldi, Yandex Browser
+- ❌ **Firefox не поддерживается** — в Firefox отсутствует программный PiP API
 - Автоматическое обновление каждую секунду
 
 
@@ -206,15 +212,13 @@ Have questions, installation issues, or feature suggestions?<br>
 
 ### Method 1: Via GreasyFork (Recommended)
 1. Install the **Tampermonkey** extension for your browser:
-   - [Tampermonkey for Chrome / Edge / Yandex / Vivaldi / etc](https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo)
-   - [Tampermonkey for Firefox](https://addons.mozilla.org/en-US/firefox/addon/tampermonkey/)
+   - [Tampermonkey for Chrome / Edge / Yandex / Vivaldi / Opera](https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo)
 
 2. **Enable Developer Mode**:
    - Open your browser's extensions page:
      - Chrome/Edge: `chrome://extensions/`
-     - Firefox: `about:addons`
      - Opera: `opera://extensions/`
-   - Or use keyboard shortcuts: `Ctrl + Shift + E` (Chrome/Edge), `Ctrl + Shift + A` (Firefox)
+   - Or use keyboard shortcuts: `Ctrl + Shift + E` (Chrome/Edge)
    - Enable **"Developer Mode"**
    
    ![Developer Mode](screenshots/extensions%20screen.jpg)
@@ -237,13 +241,14 @@ Have questions, installation issues, or feature suggestions?<br>
     - **ACTIVE / OPEN**: Toggle Picture-in-Picture (PiP) mode.
     - **VISIBILITY**: Customize visible elements (avatars, builds, bans).
     - **SETTINGS**: Change language, text scale, and icon sizes.
+    - **🧪 TEST**: Test mode for configuring the overlay without an active game.
 
 ![Lobby Example](screenshots/usage_lobby.png)
 
 ![Control Buttons](screenshots/usage_buttons.png)
 
 <table><tr><td style="border: 2px solid #0066cc; padding: 10px; background-color: #cce5ff; color: #000000;">
-💡 <b>Tip:</b> You can configure the overlay before playing by visiting any lobby on the <a href="https://ladder.megabonk.su/ladder?tab=watchNow">Watch Now</a> tab. This allows you to fine-tune size, opacity, and visible elements.
+💡 <b>Tip:</b> Use the <b>🧪 TEST</b> button to configure the overlay with test data without needing to enter a real lobby. This allows you to fine-tune size, opacity, and visible elements.
 </td></tr></table>
 <table><tr><td style="border: 2px solid #ff0000; padding: 10px; background-color: #ffcccc; color: #000000;">
 ⚠️ <b>IMPORTANT:</b> <b>Full Focus</b> and <b>Focus Mode</b> limit the functionality of some settings. To fully understand all overlay capabilities, it's recommended to experiment with settings <b>without enabling these modes first</b>.
@@ -333,7 +338,8 @@ If you've enabled Developer Mode but the overlay still doesn't appear, try enabl
 ### 🖼️ Picture-in-Picture (PiP)
 - Place stats window **over the game**
 - Move and resize the window
-- Works in all modern browsers
+- ⚠️ **Chrome-based browsers only**: Chrome, Edge, Opera, Vivaldi, Yandex Browser
+- ❌ **Firefox is NOT supported** — Firefox lacks programmatic PiP API
 - Auto-updates every second
 
 
