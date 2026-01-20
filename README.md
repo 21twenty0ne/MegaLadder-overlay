@@ -30,18 +30,18 @@
 
 <br>
 
-[ℹ️ О проекте](#о-проекте--about) &nbsp; | &nbsp;
-[🛡️ Безопасность](#безопасность-и-поддержка--safety--support) &nbsp; | &nbsp;
-[📸 Скриншоты](#скриншоты--screenshots) &nbsp; | &nbsp;
-[🕹️ Примеры](#примеры-в-игре--in-game-examples) &nbsp; | &nbsp;
-[❗ Проблемы](#частые-проблемы-при-установке) &nbsp; | &nbsp;
-[✨ Возможности](#функции-и-возможности--features--capabilities)
+[ℹ️ О проекте](#about) &nbsp; | &nbsp;
+[🛡️ Безопасность](#safety) &nbsp; | &nbsp;
+[📸 Скриншоты](#screenshots) &nbsp; | &nbsp;
+[🕹️ Примеры](#examples) &nbsp; | &nbsp;
+[❗ Проблемы](#problems) &nbsp; | &nbsp;
+[✨ Возможности](#features)
 
 </div>
 
 ---
 
-## О проекте / About
+## <a name="about"></a>О проекте / About
 
 **MegaLadder Stats Overlay** — продвинутый оверлей для отслеживания статистики в реальном времени на [ladder.megabonk.su](https://ladder.megabonk.su/). Поддерживает режим **Picture-in-Picture (PiP)** для размещения окна статистики поверх игры.
 
@@ -63,7 +63,7 @@
 <i>PiP mode only works in Chrome-based browsers: Chrome, Edge, Opera, Vivaldi, Yandex Browser and others.</i>
 </td></tr></table>
 
-## 🛡️ Безопасность и Поддержка / Safety & Support
+## <a name="safety"></a>🛡️ Безопасность и Поддержка / Safety & Support
 
 > **⚠️ Банят ли за использование?**
 > **Нет.** Это браузерное расширение, которое работает исключительно как оверлей и **не взаимодействует с файлами игры**.
@@ -85,7 +85,7 @@ Have questions, installation issues, or feature suggestions?<br>
 
 ---
 
-## Скриншоты / Screenshots
+## <a name="screenshots"></a>Скриншоты / Screenshots
 
 | Общий вид / Overview | Мини-режим / Full Focus Mode |
 |:---:|:---:|
@@ -95,7 +95,7 @@ Have questions, installation issues, or feature suggestions?<br>
 |:---:|:---:|
 | ![Stats](screenshots/stats.png) | ![Settings](screenshots/settings_menu.png) |
 
-## Примеры в игре / In-Game Examples
+## <a name="examples"></a>Примеры в игре / In-Game Examples
 
 | Компактный режим / Compact Mode | Полный режим / Full Mode |
 |:---:|:---:|
@@ -103,7 +103,7 @@ Have questions, installation issues, or feature suggestions?<br>
 
 ---
 
-## Инструкция по установке
+## <a name="install"></a>Инструкция по установке
 
 ### Способ 1: Через GreasyFork (рекомендуется)
 1. Установите расширение **Tampermonkey** для вашего браузера:
@@ -150,7 +150,7 @@ Have questions, installation issues, or feature suggestions?<br>
 
 ---
 
-### ❗ Частые проблемы при установке
+### <a name="problems"></a>❗ Частые проблемы при установке
 
 #### Проблема 1: Tampermonkey просит включить режим разработчика
 
@@ -184,7 +184,7 @@ Have questions, installation issues, or feature suggestions?<br>
 
 ---
 
-## Функции и возможности / Features & Capabilities
+## <a name="features"></a>Функции и возможности / Features & Capabilities
 
 ### 🎮 Режимы отображения / Display Modes
 
@@ -248,7 +248,7 @@ Have questions, installation issues, or feature suggestions?<br>
 
 ---
 
-## Installation Guide
+## <a name="guide"></a>Installation Guide
 
 ### Method 1: Via GreasyFork (Recommended)
 1. Install the **Tampermonkey** extension for your browser:
@@ -328,7 +328,7 @@ It is recommended to use Chromium-based browsers (Chrome, Edge, Opera, Yandex, e
 
 ---
 
-## Features & Capabilities
+## <a name="capabilities"></a>Features & Capabilities
 
 ### 🎮 Display Modes
 
@@ -392,7 +392,7 @@ It is recommended to use Chromium-based browsers (Chrome, Edge, Opera, Yandex, e
 
 ---
 
-## License
+## <a name="license"></a>License
 
 MIT License - see [LICENSE](LICENSE) file for details.
 
