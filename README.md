@@ -34,7 +34,7 @@
 [🛡️ Безопасность](#️-безопасность-и-поддержка--safety--support) &nbsp; | &nbsp;
 [📸 Скриншоты](#скриншоты--screenshots) &nbsp; | &nbsp;
 [🕹️ Примеры](#примеры-в-игре--in-game-examples) &nbsp; | &nbsp;
-[🛠️ Установка](#инструкция-по-установке) &nbsp; | &nbsp;
+[❗ Проблемы](#❗-частые-проблемы-при-установке) &nbsp; | &nbsp;
 [✨ Возможности](#функции-и-возможности--features--capabilities)
 
 </div>
@@ -175,6 +175,13 @@ Have questions, installation issues, or feature suggestions?<br>
 
 ---
 
+#### Проблема 3: У меня Firefox и ничего не работает
+
+**Решение:** К сожалению, Firefox не поддерживает технологию **Picture-in-Picture API**, необходимую для работы оверлея поверх игры. 
+Рекомендуется использовать браузеры на базе Chromium (Chrome, Edge, Opera, Yandex и др.).
+
+---
+
 ## Функции и возможности / Features & Capabilities
 
 ### 🎮 Режимы отображения / Display Modes
@@ -309,6 +316,13 @@ If you've enabled Developer Mode but the overlay still doesn't appear, try enabl
 3. Enable the **"Allow user scripts"** option
    
    ![Allow User Scripts](screenshots/troubleshoot_allow_scripts.png)
+
+---
+
+#### Issue 3: I'm using Firefox and it doesn't work
+
+**Solution:** Unfortunately, Firefox does not support the **Picture-in-Picture API** required for the overlay to function over the game screen. 
+It is recommended to use Chromium-based browsers (Chrome, Edge, Opera, Yandex, etc.).
 
 ---
 
