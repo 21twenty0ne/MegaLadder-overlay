@@ -10,6 +10,28 @@
 
 ---
 
+<div align="center">
+<table border="0">
+  <tr>
+    <td align="center" style="border: 2px solid #8ac467; border-radius: 10px; padding: 10px 20px;">
+        <a href="https://greasyfork.org/ru/scripts/562557-megaladder-stats-overlay" style="text-decoration: none;"><b>🚀 УСТАНОВИТЬ / INSTALL</b></a>
+    </td>
+    <td width="10"></td>
+    <td align="center" style="border: 2px solid #555; border-radius: 10px; padding: 10px 20px;">
+        <a href="#инструкция-по-установке" style="text-decoration: none;"><b>📖 ИНСТРУКЦИЯ / GUIDE</b></a>
+    </td>
+  </tr>
+</table>
+
+<br>
+
+**Последняя версия / Latest Version:** `v1.2.0`  
+**Дата обновления / Last Updated:** `20.01.2026`
+
+</div>
+
+---
+
 ## О проекте / About
 
 **MegaLadder Stats Overlay** — продвинутый оверлей для отслеживания статистики в реальном времени на [ladder.megabonk.su](https://ladder.megabonk.su/). Поддерживает режим **Picture-in-Picture (PiP)** для размещения окна статистики поверх игры.
