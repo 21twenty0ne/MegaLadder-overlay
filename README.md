@@ -122,6 +122,24 @@ Have questions, installation issues, or feature suggestions?<br>
 4. Нажмите кнопку **"Установить этот скрипт"**
 5. Готово! Откройте [ladder.megabonk.su](https://ladder.megabonk.su/) и начните использовать оверлей
 
+---
+
+### <a name="updates"></a>🔄 Как получать обновления быстрее?
+
+По умолчанию Tampermonkey проверяет обновления раз в сутки. Чтобы получать новые функции и исправления сразу после их выхода:
+
+#### 1. Настройка автоматической проверки:
+1. Откройте **Панель управления Tampermonkey**.
+2. Перейдите во вкладку **Настройки** (Settings).
+3. В разделе **Обновление пользовательских скриптов** (Usercheck Updates) установите параметр **Проверять обновления** на **Каждые 6 часов** или другой, удобный для вас вариант.
+
+![Настройки обновлений](screenshots/update_settings.png)
+
+#### 2. Ручная проверка:
+1. Нажмите на иконку Tampermonkey в браузере.
+2. Выберите пункт **Утилиты** (Utilities).
+3. Нажмите **Проверить обновления пользовательских скриптов** (Check for userscript updates).
+
 ### Способ 2: Вручную через GitHub
 1. Установите **Tampermonkey** (см. ссылки выше)
 2. **Включите режим разработчика** (см. инструкцию выше)
@@ -266,6 +284,24 @@ Have questions, installation issues, or feature suggestions?<br>
 3. Visit the script page: **[MegaLadder Stats Overlay on GreasyFork](https://greasyfork.org/ru/scripts/562557-megaladder-stats-overlay)**
 4. Click the **"Install this script"** button
 5. Done! Open [ladder.megabonk.su](https://ladder.megabonk.su/) and start using the overlay
+
+---
+
+### <a name="updates-en"></a>🔄 How to get updates faster?
+
+By default, Tampermonkey checks for updates once a day. To receive new features and fixes as soon as they are released:
+
+#### 1. Configure automatic checks:
+1. Open the **Tampermonkey Dashboard**.
+2. Go to the **Settings** tab.
+3. In the **Usercheck Updates** section, set **Check for updates** to **Every 6 hours**.
+
+![Update Settings](screenshots/update_settings.png)
+
+#### 2. Manual check:
+1. Click the Tampermonkey icon in your browser.
+2. Select **Utilities**.
+3. Click **Check for userscript updates**.
 
 
 ### Method 2: Manual Installation via GitHub
