@@ -25,7 +25,7 @@
 
 <br>
 
-**Последняя версия / Latest Version:** `v1.2.0`  
+**Последняя версия / Latest Version:** `v1.2.0` ([Как получать обновления?](#updates) / [How to update?](#updates-en))  
 **Дата обновления / Last Updated:** `20.01.2026`
 
 <br>
