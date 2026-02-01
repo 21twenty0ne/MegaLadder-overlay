@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         MegaLadder Stats Overlay
 // @namespace    http://tampermonkey.net/
-// @version      1.2.0
+// @version      1.2.1
 // @description  Overlay for MegaLadder, GAZ. Supports PiP mode for overlaying on game screen.
 // @author       21twentyone
 // @license      MIT
@@ -41,7 +41,8 @@
         showKills: JSON.parse(localStorage.getItem('ml_pip_show_kills') ?? 'true'),
         showLevel: JSON.parse(localStorage.getItem('ml_pip_show_level') ?? 'true'),
         showDiff: JSON.parse(localStorage.getItem('ml_pip_show_diff') ?? 'true'),
-        showOvertimeTimer: JSON.parse(localStorage.getItem('ml_pip_show_overtime') ?? 'true')
+        showOvertimeTimer: JSON.parse(localStorage.getItem('ml_pip_show_overtime') ?? 'true'),
+        showMMRBadge: JSON.parse(localStorage.getItem('ml_pip_show_mmr_badge') ?? 'true')
     }
 
     // --- Profile System ---
@@ -188,6 +189,7 @@
             kills: 'УБИЙСТВА',
             level: 'УРОВЕНЬ',
             diff: 'СЛОЖНОСТЬ',
+            mmr_badge: 'Знак ранга',
             you: 'Вы',
             enemy: 'Враг',
             // Warnings
@@ -243,6 +245,7 @@
             kills: 'KILLS',
             level: 'LEVEL',
             diff: 'DIFFICULTY',
+            mmr_badge: 'Rank Badge',
             you: 'You',
             you: 'You',
             enemy: 'Enemy',
@@ -291,7 +294,9 @@
 
     const imgCache = {
         lAvatar: new Image(), rAvatar: new Image(),
+        lBadge: new Image(), rBadge: new Image(),
         lSrc: '', rSrc: '',
+        lBadgeSrc: '', rBadgeSrc: '',
         bans: new Map()
     }
 
@@ -329,6 +334,8 @@
     }
     imgCache.lAvatar.crossOrigin = "Anonymous"
     imgCache.rAvatar.crossOrigin = "Anonymous"
+    imgCache.lBadge.crossOrigin = "Anonymous"
+    imgCache.rBadge.crossOrigin = "Anonymous"
 
     const getCachedImage = (src) => {
         if (!src) return null
@@ -498,7 +505,14 @@
     `
 
 
-    function parseComplexNumber(str) { return parseFloat((str || '').replace(/,/g, '.').replace(/\s&nbsp;/g, '').replace(/[^0-9.-]/g, '')) || 0 }
+    function parseComplexNumber(str) {
+        if (!str) return 0
+        // Split at parens or newline to strip diffs/extra info
+        let main = str.split(/[\(\)\n]/)[0]
+        // Standard cleanup: comma->dot, remove spaces/non-numeric
+        const clean = main.replace(/,/g, '.').replace(/[^0-9.-]/g, '')
+        return parseFloat(clean) || 0
+    }
     function parseLevel(str) { return parseInt((str || '').replace(/\D/g, ''), 10) || 0 }
     function parseTime(timeStr) {
         if (!timeStr) return GAME_TOTAL_MINUTES
@@ -586,7 +600,7 @@
             const dynRowHeight = sideSize / count
 
             activeMetrics.forEach((m, idx) => {
-                const diffStr = (m.val > 0 ? '+' : '') + m.val
+                const diffStr = (m.val > 0 ? '+' : '') + formatNum(m.val)
                 const color = m.val > 0 ? C.green : (m.val < 0 ? C.red : '#888')
 
                 const yTop = idx * dynRowHeight
@@ -892,24 +906,50 @@
         }
 
         if (SETTINGS.showMMR) {
-            if (!isFocus) {
-                drawText(data.lMMR, lNameX, mmrY, 12, C.gold, lAlign, '600', maxNameW)
+            const drawBadge = (iconSrc, x, y, align, cacheImg) => {
+                if (!SETTINGS.showMMRBadge || !iconSrc) return 0
+                const size = 18 * SETTINGS.scale
+                const img = cacheImg
+                if (img && img.complete && img.naturalWidth > 0) {
+                    if (align === 'left') {
+                        ctx.drawImage(img, x, y - size + (4 * SETTINGS.scale), size, size)
+                        return size + (4 * SETTINGS.scale)
+                    } else if (align === 'right') {
+                        ctx.drawImage(img, x - size, y - size + (4 * SETTINGS.scale), size, size)
+                        return size + (4 * SETTINGS.scale)
+                    }
+                }
+                return 0
             }
-            drawText(data.rMMR, rNameX, mmrY, 12, C.gold, rAlign, '600', maxNameW)
+
+            if (!isFocus) {
+                let lOffset = 0
+                if (SETTINGS.showMMRBadge && imgCache.lBadgeSrc) {
+                    lOffset = drawBadge(imgCache.lBadgeSrc, lNameX, mmrY, 'left', imgCache.lBadge)
+                }
+                drawText(data.lMMR, lNameX + lOffset, mmrY, 12, data.lMMRColor || C.gold, lAlign, '600', maxNameW - lOffset)
+            }
+
+            let rOffset = 0
+            if (SETTINGS.showMMRBadge && imgCache.rBadgeSrc) {
+                rOffset = drawBadge(imgCache.rBadgeSrc, rNameX, mmrY, 'right', imgCache.rBadge)
+            }
+            drawText(data.rMMR, rNameX - rOffset, mmrY, 12, data.rMMRColor || C.gold, rAlign, '600', maxNameW - rOffset)
 
             if (data.lRatingDiff !== null) {
                 const rDiffColor = data.rRatingDiff > 0 ? C.green : C.red
                 const diffStr = (data.rRatingDiff > 0 ? "+" : "") + data.rRatingDiff
+                const badgeOffset = SETTINGS.showMMRBadge ? (22 * SETTINGS.scale) : 0
 
                 if (isFocus) {
                     const mmrW = ctx.measureText(data.rMMR).width + (5 * SETTINGS.scale)
                     drawText(diffStr, rNameX + mmrW, mmrY, 12, rDiffColor, 'left', 'bold')
                 } else {
-                    const rMmrW = ctx.measureText(data.rMMR).width + (5 * SETTINGS.scale)
+                    const rMmrW = ctx.measureText(data.rMMR).width + (5 * SETTINGS.scale) + badgeOffset
                     drawText(diffStr, rNameX - rMmrW, mmrY, 12, rDiffColor, 'right', 'bold')
 
                     const lDiffColor = data.lRatingDiff > 0 ? C.green : C.red
-                    const lMmrW = ctx.measureText(data.lMMR).width + (5 * SETTINGS.scale)
+                    const lMmrW = ctx.measureText(data.lMMR).width + (5 * SETTINGS.scale) + badgeOffset
                     drawText((data.lRatingDiff > 0 ? "+" : "") + data.lRatingDiff, lNameX + lMmrW, mmrY, 12, lDiffColor, 'left', 'bold')
                 }
             }
@@ -1354,6 +1394,7 @@
             { id: 'focusRival', label: t('focus_mode') },
             { id: 'separateTimers', label: t('sep_timers') },
             { id: 'showAvatars', label: t('avatars') }, { id: 'showNames', label: t('names') }, { id: 'showMMR', label: t('mmr') },
+            { id: 'showMMRBadge', label: t('mmr_badge') },
             { id: 'showBuilds', label: t('builds') },
             { id: 'showMainTimer', label: t('main_timer') },
             { id: 'showStages', label: t('stages') },
@@ -1588,6 +1629,7 @@
             'showAvatars': 'show_avatars',
             'showNames': 'show_names',
             'showMMR': 'show_mmr',
+            'showMMRBadge': 'show_mmr_badge',
             'showKills': 'show_kills',
             'showLevel': 'show_level',
             'showDiff': 'show_diff',
@@ -1664,10 +1706,12 @@
             setChk('showAvatars', false)
             setChk('showNames', false)
             setChk('showMMR', false)
+            setChk('showMMRBadge', false)
             setChk('showBuilds', false)
             setChk('showMainTimer', false)
             setChk('showStages', false)
             setChk('showEventTimers', false)
+            setChk('showOvertimeTimer', false)
             setChk('showLeftBans', false)
             setChk('showRightBans', false)
             setChk('showCommonBans', false)
@@ -1791,10 +1835,41 @@
             if (lImgSrc !== imgCache.lSrc) { imgCache.lSrc = lImgSrc; imgCache.lAvatar.src = lImgSrc; }
             if (rImgSrc !== imgCache.rSrc) { imgCache.rSrc = rImgSrc; imgCache.rAvatar.src = rImgSrc; }
 
+            // Cache badges will be handled after parsing
+
+
             const lName = leftCol.querySelector('.player-row__nickname')?.textContent || 'You'
             const rName = rightCol.querySelector('.player-row__nickname')?.textContent || 'Enemy'
-            const lMMR = leftCol.querySelector('.player-row__rating-value')?.textContent || ''
-            const rMMR = rightCol.querySelector('.player-row__rating-value')?.textContent || ''
+            const parseMMR = (col) => {
+                const ribbon = col.querySelector('.player-row__rating-ribbon')
+                if (ribbon) {
+                    const val = ribbon.querySelector('.player-row__rating-ribbon-value')?.textContent || ''
+                    const color = ribbon.style.getPropertyValue('--rank-color') || '#fbc403'
+                    const icon = ribbon.querySelector('.player-row__rating-ribbon-icon')?.src || ''
+                    return { val, color, icon }
+                }
+                // Fallback
+                return { val: col.querySelector('.player-row__rating-value')?.textContent || '', color: '#fbc403', icon: '' }
+            }
+            const lMMRData = parseMMR(leftCol)
+            const rMMRData = parseMMR(rightCol)
+            const lMMR = lMMRData.val
+            const rMMR = rMMRData.val
+            const lMMRColor = lMMRData.color
+            const rMMRColor = rMMRData.color
+            const lMMRIcon = lMMRData.icon
+            const rMMRIcon = rMMRData.icon
+
+            // Cache badge images
+            if (lMMRIcon && lMMRIcon !== imgCache.lBadgeSrc) {
+                imgCache.lBadgeSrc = lMMRIcon
+                imgCache.lBadge.src = lMMRIcon
+            }
+            if (rMMRIcon && rMMRIcon !== imgCache.rBadgeSrc) {
+                imgCache.rBadgeSrc = rMMRIcon
+                imgCache.rBadge.src = rMMRIcon
+            }
+
             const lTimer = leftCol.querySelector('.run-card__timer-value')?.textContent || '45:00'
             const rTimer = rightCol.querySelector('.run-card__timer-value')?.textContent || '45:00'
 
@@ -1894,7 +1969,9 @@
                 lRatingDiff, rRatingDiff,
                 lPaused, rPaused,
                 lOvertime, rOvertime,
-                lBuild, rBuild
+                lBuild, rBuild,
+                lMMRColor, rMMRColor,
+                lMMRIcon, rMMRIcon
             })
 
         } catch (e) { console.error(e) }
